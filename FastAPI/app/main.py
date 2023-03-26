@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 from .database import get_db, Session, text
+from . import models
 
 app = FastAPI()
 
