@@ -1,5 +1,5 @@
-// const getToken = sessionStorage.getItem('token');
+const getToken = sessionStorage.getItem('token');
 const getOperatorId = sessionStorage.getItem('operator_id');
 
-// document.getElementById('token').textContent = getToken;
+document.getElementById('token').textContent = getToken;
 document.getElementById('operator-id').textContent = getOperatorId;

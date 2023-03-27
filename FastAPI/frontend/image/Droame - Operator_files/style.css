@@ -47,7 +47,7 @@
     width: 400px;
     height: 400px;
     opacity: 80%;
-    /* background-image: url("image/droame-logo.jpg"); */
+    background-image: url("image/droame-logo.jpg");
     background-size: 100%;
     position: absolute;
     left: 0;

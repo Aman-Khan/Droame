@@ -1,0 +1,33 @@
+  // Get the form element
+  const form = document.querySelector('#reg-form');
+
+  // Add a submit event listener to the form
+  form.addEventListener('submit', async (event) => {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Get the form data
+    const formData = new FormData(form);
+    const keys = ["gt","tt"];
+    // for (const key of formData.keys()) {
+    // keys.push(key);
+    // }
+    // console.log(keys);
+    
+    try {
+      // Send a POST request to the API endpoint with the form data
+      const response = await fetch('http://127.0.0.1:8000/register', {
+        method: 'POST',
+        body: formData
+      });
+
+      // If the response status code is not 201, show an alert message with the response details
+      if (response.status !== 201) {
+        const data = await response.json();
+        alert(`Error: ${response.status} - ${data.detail}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
