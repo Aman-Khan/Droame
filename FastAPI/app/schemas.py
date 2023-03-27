@@ -12,10 +12,9 @@ class Operator_SignUp(BaseModel):
     operator_id: str
     password: str
 
-    class Config:
-        orm_mode=True
 
 class TokenData(BaseModel):
     opeartor_id: str
     class Config:
         orm_mode=True
+    

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from ..database import get_db, Session
-from .. import models, schemas, utils
+from .. import models, schemas, utils, oauth
 
 router = APIRouter(tags=['Operator'])
 
@@ -22,3 +22,13 @@ def signUp(op_cred: schemas.Operator_SignUp, db: Session = Depends(get_db)):
         return register
     else: raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='user already exists') 
 
+@router.post('/signin', status_code=status.HTTP_201_CREATED)
+def logIn(op_cred: schemas.Operator_SignUp, db: Session = Depends(get_db)):
+    search_user = db.query(models.Operators).filter(models.Operators.operator_id==op_cred.operator_id).first() 
+
+    if search_user is None or not utils.verify(op_cred.password, search_user.password): 
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='invalid credentials')
+    else:
+        data  = {'operator_id':op_cred.operator_id}
+        jwt_token = oauth.create_access_token(data)
+        return {'token':jwt_token}
