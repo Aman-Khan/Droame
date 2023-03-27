@@ -15,3 +15,7 @@ class Operator_SignUp(BaseModel):
     class Config:
         orm_mode=True
 
+class TokenData(BaseModel):
+    opeartor_id: str
+    class Config:
+        orm_mode=True
