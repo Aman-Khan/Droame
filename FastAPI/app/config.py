@@ -7,6 +7,10 @@ class Setting(BaseSettings):
     database_pwd: str
     database_host: str
 
+    secret_key : str
+    algorithm: str
+    token_expire_time: int
+    
     class Config:
         env_file = '.env'
 
