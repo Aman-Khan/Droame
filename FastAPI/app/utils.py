@@ -22,3 +22,25 @@ def phoneNoValidater(cust_info: schemas.Register_Customer):
     cust_info.country_code = country_c  
     cust_info.phone_number = phone_no[-10:]  
     return True
+
+def phoneNoValidater2(cust_info: schemas.PhoneNumber):
+    phone_no = cust_info.phone_number
+    phone_no_len = len(phone_no)
+    if phone_no_len<10 or phone_no_len>15: return False
+    elif len(phone_no[:-10])>5: return False 
+    for i in phone_no[-10:]:
+        if i.isdigit()==False: return False
+    country_c = ''
+    for i in phone_no[:-10]:
+        if i.isdigit():
+            country_c+=i
+    cust_info.country_code = country_c  
+    cust_info.phone_number = phone_no[-10:]  
+    return True
+
+def validateEmail(eml: str):
+    try:
+        schemas.UserEmail(email=eml)
+    except:
+        return False
+    return True

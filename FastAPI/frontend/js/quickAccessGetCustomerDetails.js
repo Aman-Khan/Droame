@@ -23,9 +23,13 @@ custSearch.addEventListener("submit", function(event) {
       return response.json();
     })
     .then(data => {
+      // console.log(data)
       // update the inner HTML of the element with the fetched data
-      // const customerDetails = document.getElementById("customer-details");
-      // customerDetails.innerHTML = `Customer ID: ${data.customer_id}, Operator ID: ${data.operator_id}`;
+      const customerDetails = document.getElementById("customer-details");
+      customerDetails.innerHTML = `<b>Customer ID</b> : ${data.customer_id}
+       <br> <b>Name</b> : ${data.customer_name}
+       <br> <b>Email</b> : ${data.customer_email}
+       <br> <b>Phone No</b> : ${data.customer_name}`;
     })
     .catch(error => {
       // display an alert with the error details

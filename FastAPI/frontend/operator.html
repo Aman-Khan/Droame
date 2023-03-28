@@ -31,9 +31,9 @@
                 <div class="">
                     <ul class="list-group fw-bold">
                         <li class="list-group-item" data-target="#createCustomerContainer, #quickAccessCreateCustomer"><a href="#" class="text-decoration-none">Create Customer</a></li>
+                        <li class="list-group-item" data-target="#getCustomerDetailsContainer, #quickAccessCustomerDetails"><a href="#" class="text-decoration-none">Get Customer Details</a></li>
                         <li class="list-group-item" data-target="#manageCustomerContainer, #quickAccessManageCustomer"><a href="#" class="text-decoration-none">Manage Customer</a></li>
                         <li class="list-group-item" data-target="#bookDroneShotContainer, #quickAccessBookDroneShot"><a href="#" class="text-decoration-none">Book Drone Shot</a></li>
-                        <li class="list-group-item" data-target="#getCustomerDetailsContainer"><a href="#" class="text-decoration-none">Get Customer Details</a></li>
                     </ul>
                     <ul class="list-group fw-bold px-2">
                         <br><br>
@@ -54,22 +54,21 @@
                             </tbody>
                           </table>
                     </div>
-                    <script src="js/quickAccessCreateCustomer.js" ></script>
                         
-                    <div id="quickAccessManageCustomer" class="container float-end py-2">
+                    <div id="quickAccessCustomerDetails" class="container float-end py-2">
                         <div class="card text-white bg-primary" style="max-width: 23rem;">
-                            <div class="card-header">Customer Details</div>
+                            <div class="card-header"><b>Customer Details</b></div>
                             <div class="card-body">
                                 <div id="quick-customer-det"></div>
-                              <h5 class="card-title">Primary card title</h5>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div id="customer-details"></div>
                             </div>
-                          </div>
+                        </div>
                     </div>
-                    <div id="quickAccessBookDroneShot" class="container invi-container">
+
+                    <div id="quickAccessManageCustomer" class="container invi-container">
  
                         <h1 style="color:black">quick 3</h1>
-                  </div>
+                    </div>
                 </div>
 
             </div>
@@ -104,41 +103,82 @@
                     </div>
                 </div>
                 <script src="js/quickAccessCreateCustomer.js"></script>
-                <div id="manageCustomerContainer" class="container invi-container">
+                
+                <div id="getCustomerDetailsContainer" class="container invi-container">
                     <div class="content py-4">
-                    <h4>Manage Customer</h4>
-                    <form id="manage-customer-search" class="form-inline">
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="search-options" class="sr-only">Search by:</label>
-                            <select class="form-control" id="search-options" name="search_option">
-                            <option value="customer_id">Customer ID</option>
-                            <option value="customer_email">Customer Email</option>
-                            <option value="phone_number">Phone Number</option>
-                            </select>
+                        <h4>Get Customer Details</h4>
+                        <form id="manage-customer-search" class="form-inline">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="search-options" class="sr-only">Search by:</label>
+                                <select class="form-control" id="search-options" name="search_option">
+                                <option value="customer_id">Customer ID</option>
+                                <option value="customer_email">Customer Email</option>
+                                <option value="phone_number">Phone Number</option>
+                                </select>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="search-value" class="sr-only">Search value:</label>
+                                <input type="text" class="form-control" id="search-value" name="search_value" placeholder="Enter search value">
+                            </div>
+                            <button type="submit" class="btn btn-primary mx-3 px-3">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <script src="js/quickAccessGetCustomerDetails.js"></script>
+
+                <div id="manageCustomerContainer" class="container invi-container">
+                    <h1>Manage Customer</h1>
+                <div class="container-fluid" style="margin-top: 40px;">
+                    <h5><i>Update Customer Details</i></h5>
+                    <form id="manage-customer-edit" class="form-inline">
+                        <div class="row">
+                            <div class="col-sm">
+                                <label for="search-options" class="sr-only">Edit :</label>
+                                <select class="form-control" id="search-options" name="search_option">
+                                    <option value="customer_name">Name</option>
+                                    <option value="customer_email">Email</option>
+                                    <option value="phone_number">Phone Number</option>
+                                </select>
+                            </div>
+                            <div class="col-sm px-3">
+                                <div class="col">
+                                    <label for="search-value" class="sr-only" >Customer Id :</label>
+                                    <input type="text" class="form-control" id="search-value" name="customer_id" placeholder="Enter Customer Id">
+                                </div>
+                                <label for="search-value" class="sr-only">New Value:</label>
+                                <input type="text" class="form-control" id="search-value" name="search_value" placeholder="Enter New Value">
+                            </div>
+                            <div class="col-sm">
+                                <button type="submit" class="btn btn-primary" style="margin-top:23px ;">Update</button>
+                            </div>
                         </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="search-value" class="sr-only">Search value:</label>
-                            <input type="text" class="form-control" id="search-value" name="search_value" placeholder="Enter search value">
-                        </div>
-                        <button type="submit" class="btn btn-primary mx-3 px-3">Search</button>
                     </form>
                 </div>
-                <script src="js/quickAccessManageCustomer.js"></script>
-
+                <div class="container-fluid" style="margin-top: 40px;">
+                    <h5><i>Delete Customer</i></h5>
+                    <form id="manage-customer-delete" class="form-inline">
+                        <div class="row" style="width: 67%;" >
+                            <div class="col">
+                                <label for="search-value" class="sr-only" >Customer Id :</label>
+                                <input type="text" class="form-control" id="DeleteCustomer" name="customer_id" placeholder="Enter Customer Id">
+                            </div>
+                            <div class="col float-start" style="padding-top: 22px;">
+                                <button type="submit" class="btn btn-danger mx-3 px-3">Delete</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <script src="js/manageCustomer.js"></script>
 
             <div id="bookDroneShotContainer" class="container invi-container">
                 <h1>Book Drone Shot Container</h1>
                 <p>This is the content for Book Drone Shot.</p>
             </div>
-            <div id="getCustomerDetailsContainer" class="container invi-container">
-                <h1>Get Customer Details Container</h1>
-                <p>This is the content for Get Customer Details.</p>
-            </div>
-            <div id="quickAccessContainer" class="container invi-container">
+            <!-- <div id="quickAccessContainer" class="container invi-container">
                 <h1>Quick Access Container</h1>
                 <p>This is the content for Quick Access.</p>
-            </div>
+            </div> -->
         </div>
 
         <script>

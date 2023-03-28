@@ -34,6 +34,31 @@ def registerCustomer(db: Session = Depends(get_db), user: oauth.get_current_user
 #     # Here you can use searchOption and searchValue to fetch customer details from a database or other source
 #     return {"searchOption": searchOption, "searchValue": searchValue}
 
+@router.patch("/update/{customerId}")
+def updateCustomerDetails(customerId: str, data: dict, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
+    get_customer = db.query(models.Customers).filter(models.Customers.customer_id==customerId).filter(models.Customers.operator_id==user.operator_id).first()
+    email = data.get('customer_email')
+    name = data.get('customer_name')
+    phone = data.get('phone_number')
+    if get_customer is None: raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="customer don't exist")
+    elif name is not None:
+        if len(name)<1: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="invalid name")
+        else: get_customer.customer_name = name
+    elif email is not None:
+        if utils.validateEmail(email)==False:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="invalid email")
+        else: get_customer.customer_email = email
+    elif phone is not None:
+        phSc = schemas.PhoneNumber(phone_number=phone)
+        if utils.phoneNoValidater(phSc)==False:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="invalid phone number")
+        else:
+            get_customer.phone_number = phSc.phone_number
+            get_customer.country_code = phSc.country_code
+    db.commit()
+    return {'update':'success'}
+
+
 @router.get("/customer/details", response_model=schemas.Customer_Details)
 def read_item(search_option: str = None, search_value: str = None, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
     if search_option is None or search_value is None: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='invalid search')
@@ -52,4 +77,15 @@ def read_item(search_option: str = None, search_value: str = None, db: Session =
             else: return search_cust
         else: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='invalid option')
         
+@router.delete("/delete/{customerId}")
+def deleteCutomer(customerId: str, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
+    get_customer = db.query(models.Customers).filter(models.Customers.customer_id==customerId).filter(models.Customers.operator_id==user.operator_id).first()
+    if get_customer is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='customer not found')
+    else:
+        db.delete(get_customer)
+        db.commit()
+        raise HTTPException(status_code=status.HTTP_202_ACCEPTED, detail='Posted is removed')
+            
         
+
