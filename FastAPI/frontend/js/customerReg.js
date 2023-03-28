@@ -1,6 +1,7 @@
 const form = document.querySelector('#reg-form');
-const token = sessionStorage.getItem('token');
+// const token = sessionStorage.getItem('token');
 const operator_id = sessionStorage.getItem('operator_id');
+document.getElementById('operator-id').textContent = getOperatorId;
 
 const formData = new FormData(form);
 formData.append('operator_id', operator_id);
@@ -33,9 +34,10 @@ form.addEventListener('submit', async (event) => {
         alert(`Error: ${response.status} - ${data.detail}`);
     }
     else{
-        alert(`Error: ${response.status} - Customer is registerd`);
+        alert(`Successfully Registrated - ${response.status}`);
         // Clear the form
         form.reset();
+        populateRecentCustomersTable();   // quick access recent customer table reload to render new registration 
     }
     console.log(data);
   } catch (error) {

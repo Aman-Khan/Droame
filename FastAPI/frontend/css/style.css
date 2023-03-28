@@ -6,6 +6,10 @@
     display: none;
 }
 
+#quickAccessMultiple> .container{
+    display: none;
+}
+
 .invi-container{
     color: whitesmoke;
 }

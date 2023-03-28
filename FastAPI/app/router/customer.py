@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from ..database import get_db, Session
 from .. import models, schemas, oauth, utils
@@ -21,3 +22,9 @@ def registerCustomer(cust_info: schemas.Register_Customer, db: Session = Depends
     db.commit()
     db.refresh(register_cust)
     return register_cust
+
+@router.get('/recent/customers',response_model=List[schemas.Recent_Customer])
+def registerCustomer(db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
+    operator = user.operator_id
+    recCust = db.query(models.Customers).filter(models.Customers.operator_id==operator).limit(10).all()
+    return recCust
