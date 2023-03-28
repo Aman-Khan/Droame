@@ -1,5 +1,29 @@
+from datetime import datetime 
 from typing import Optional
 from pydantic import BaseModel, EmailStr
+
+class Commit_Booking(BaseModel):
+    booking_id: Optional[int]
+    operator_id: str
+    customer_id: str
+    booked_for_time: datetime 
+    drone_shot_id: int
+    location_id: int
+
+
+class Location(BaseModel):
+    location: str
+    location_id: Optional[int]
+
+class Book_Drone_Shot(BaseModel):
+    customer_id: str
+    booked_for_time: datetime 
+    location: str
+    drone_shot: str
+
+    drone_shot_id: Optional[int]
+    operator_id: Optional[str]
+    location_id: Optional[int]
 
 class PhoneNumber(BaseModel):
     phone_number: str
@@ -55,12 +79,12 @@ class Response_Register_Customer(BaseModel):
     class Config:
         orm_mode = True
 
-# class Operator_SignUp(BaseModel):    
-#     operator_id: str
-#     password: str
+class Operator_SignUp(BaseModel):    
+    operator_id: str
+    password: str
 
-# class Response_Operator_SignUp(BaseModel):
-#     operator_id: str
-#     message = 'registered'
-#     class Config:
-#         orm_mode=True
+class Response_Operator_SignUp(BaseModel):
+    operator_id: str
+    message = 'registered'
+    class Config:
+        orm_mode=True

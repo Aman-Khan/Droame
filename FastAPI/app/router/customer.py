@@ -5,6 +5,45 @@ from .. import models, schemas, oauth, utils
 
 router = APIRouter(tags=['Customer'])
 
+@router.post('/booking')
+def bookDroneShot(book_info: schemas.Book_Drone_Shot, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
+
+    book_info.operator_id = user.operator_id
+    search_time_slot = db.query(models.Bookings).filter(models.Bookings.booked_for_time==book_info.booked_for_time).first()
+    if search_time_slot is not None: raise HTTPException(status_code=status.HTTP_226_IM_USED, detail='time slot is not avaliable')   
+    search_customer = db.query(models.Customers).filter(models.Customers.customer_id==book_info.customer_id).first()
+    if search_customer is None: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="customer not found(register customer first)")
+    search_drone_shot = db.query(models.DroneShots).filter(models.DroneShots.drone_shot==book_info.drone_shot).first()
+    if search_drone_shot is None: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="invalid drone shot type")
+    book_info.drone_shot_id = search_drone_shot.drone_shot_id
+    search_location = db.query(models.Locations).filter(models.Locations.location==book_info.location).first()
+    
+    if search_location is None:
+        location_entry = schemas.Location(location=book_info.location)
+        new_location = models.Locations(**location_entry.dict())
+        db.add(new_location)
+        db.commit()
+        db.refresh(new_location) 
+    
+    loc = db.query(models.Locations).filter(models.Locations.location==book_info.location).first()
+    book_info.location_id = loc.location_id
+
+    book_info_commit = schemas.Commit_Booking(
+        operator_id=book_info.operator_id,
+        customer_id=book_info.customer_id,
+        booked_for_time=book_info.booked_for_time,
+        location_id=book_info.location_id,
+        drone_shot_id=book_info.drone_shot_id
+    )
+    booked = models.Bookings(**book_info_commit.dict())
+    
+    db.add(booked)
+    db.commit()
+    db.refresh(booked)
+
+    return {'message':'working'}
+
+
 @router.post('/register', status_code=status.HTTP_201_CREATED)
 def registerCustomer(cust_info: schemas.Register_Customer, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
     if user.operator_id!=cust_info.operator_id: raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='invalid credentails(opreated_id)')

@@ -29,9 +29,11 @@ class Bookings(Base):
     __tablename__  = 'bookings'
 
     booking_id     = Column(INTEGER, primary_key=True, autoincrement=True, nullable=False)
-    customer_id    = Column(VARCHAR(100), ForeignKey('customers.operator_id', ondelete='CASCADE'))
+    operator_id     = Column(VARCHAR(100), ForeignKey('operators.operator_id', ondelete='CASCADE'))
+    customer_id    = Column(VARCHAR(100), ForeignKey('customers.customer_id', ondelete='CASCADE'))
     location_id    = Column(INTEGER, ForeignKey('locations.location_id'), nullable=False)
     drone_shot_id  = Column(INTEGER, ForeignKey('drone_shots.drone_shot_id'), nullable=False)
     created_time   = Column(TIMESTAMP, server_default=text('NOW()'), nullable=False)
+    booked_for_time   = Column(TIMESTAMP, nullable=False)
 
 Base.metadata.create_all(bind=engine)

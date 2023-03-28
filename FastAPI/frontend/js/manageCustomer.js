@@ -20,6 +20,9 @@ document.getElementById("manage-customer-edit").addEventListener("submit", funct
     if (!response.ok) {
       alert(response.status)
       // throw new Error("Network response was not ok");
+    }else{
+      alert(`${response.status} - Updated`)
+
     }
     return response.json();
   })
