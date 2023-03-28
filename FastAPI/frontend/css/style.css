@@ -12,6 +12,7 @@
 
 .invi-container{
     color: whitesmoke;
+    padding-left: 20px;
 }
 
 .invi-container > h1{
@@ -43,7 +44,6 @@
     width: 100%;
 }
 .back {
-    background: red;
     width: 100%;
 }
 

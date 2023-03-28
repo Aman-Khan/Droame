@@ -31,8 +31,8 @@
                 <div class="">
                     <ul class="list-group fw-bold">
                         <li class="list-group-item" data-target="#createCustomerContainer, #quickAccessCreateCustomer"><a href="#" class="text-decoration-none">Create Customer</a></li>
-                        <li class="list-group-item" data-target="#manageCustomerContainer"><a href="#" class="text-decoration-none">Manage Customer</a></li>
-                        <li class="list-group-item" data-target="#bookDroneShotContainer"><a href="#" class="text-decoration-none">Book Drone Shot</a></li>
+                        <li class="list-group-item" data-target="#manageCustomerContainer, #quickAccessManageCustomer"><a href="#" class="text-decoration-none">Manage Customer</a></li>
+                        <li class="list-group-item" data-target="#bookDroneShotContainer, #quickAccessBookDroneShot"><a href="#" class="text-decoration-none">Book Drone Shot</a></li>
                         <li class="list-group-item" data-target="#getCustomerDetailsContainer"><a href="#" class="text-decoration-none">Get Customer Details</a></li>
                     </ul>
                     <ul class="list-group fw-bold px-2">
@@ -51,17 +51,31 @@
                               </tr>
                             </thead>
                             <tbody id="quick1-table-body">
-
                             </tbody>
                           </table>
                     </div>
+                    <script src="js/quickAccessCreateCustomer.js" ></script>
+                        
+                    <div id="quickAccessManageCustomer" class="container float-end py-2">
+                        <div class="card text-white bg-primary" style="max-width: 23rem;">
+                            <div class="card-header">Customer Details</div>
+                            <div class="card-body">
+                                <div id="quick-customer-det"></div>
+                              <h5 class="card-title">Primary card title</h5>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                          </div>
+                    </div>
+                    <div id="quickAccessBookDroneShot" class="container invi-container">
+ 
+                        <h1 style="color:black">quick 3</h1>
+                  </div>
                 </div>
-                <script src="js/quickAccessCreateCustomer.js" ></script>
-                </div>
+
+            </div>
             </div>
             <div id="dynamicBlock" class="container custom-width-65 my-4 mx-5 float-end operator-block">
                 <div id="createCustomerContainer" class="container invi-container">
-
                     <div class="back">
                         <div class="div-center">
                             <div class="content">
@@ -85,30 +99,48 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary my-2">Register</button>
                               </form>
-                              
                             </div>
                         </div>
                     </div>
                 </div>
+                <script src="js/quickAccessCreateCustomer.js"></script>
                 <div id="manageCustomerContainer" class="container invi-container">
-                    <h1>Manage Customer Container</h1>
-                    <p>This is the content for Manage Customer.</p>
+                    <div class="content py-4">
+                    <h4>Manage Customer</h4>
+                    <form id="manage-customer-search" class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="search-options" class="sr-only">Search by:</label>
+                            <select class="form-control" id="search-options" name="search_option">
+                            <option value="customer_id">Customer ID</option>
+                            <option value="customer_email">Customer Email</option>
+                            <option value="phone_number">Phone Number</option>
+                            </select>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="search-value" class="sr-only">Search value:</label>
+                            <input type="text" class="form-control" id="search-value" name="search_value" placeholder="Enter search value">
+                        </div>
+                        <button type="submit" class="btn btn-primary mx-3 px-3">Search</button>
+                    </form>
                 </div>
-                <div id="bookDroneShotContainer" class="container invi-container">
-                    <h1>Book Drone Shot Container</h1>
-                    <p>This is the content for Book Drone Shot.</p>
-                </div>
-                <div id="getCustomerDetailsContainer" class="container invi-container">
-                    <h1>Get Customer Details Container</h1>
-                    <p>This is the content for Get Customer Details.</p>
-                </div>
-                <div id="quickAccessContainer" class="container invi-container">
-                    <h1>Quick Access Container</h1>
-                    <p>This is the content for Quick Access.</p>
-                </div>
+                <script src="js/quickAccessManageCustomer.js"></script>
+
+            </div>
+
+            <div id="bookDroneShotContainer" class="container invi-container">
+                <h1>Book Drone Shot Container</h1>
+                <p>This is the content for Book Drone Shot.</p>
+            </div>
+            <div id="getCustomerDetailsContainer" class="container invi-container">
+                <h1>Get Customer Details Container</h1>
+                <p>This is the content for Get Customer Details.</p>
+            </div>
+            <div id="quickAccessContainer" class="container invi-container">
+                <h1>Quick Access Container</h1>
+                <p>This is the content for Quick Access.</p>
             </div>
         </div>
-        
+
         <script>
             $(document).ready(function() {
                 // Set the click event for the list items
@@ -121,12 +153,13 @@
         
                     // Hide all containers in dynamicBlock
                     $('#dynamicBlock > .container').hide();
+                    $('#quickAccessMultiple > .container').hide();
         
                     // Show the target container
                     $(targetContainer).show();
                 });
             });
         </script>
-        <script src="js/customerReg.js"></script>
+        <script src="js/customerReg.js"></script>          
 </body>
 </html>

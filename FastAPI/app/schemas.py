@@ -1,6 +1,15 @@
 from typing import Optional
 from pydantic import BaseModel, EmailStr
 
+class Customer_Details(BaseModel):
+    customer_id: str
+    customer_name: str
+    customer_email: EmailStr
+    phone_number: str
+    country_code: Optional[str] = 91
+    class Config:
+        orm_mode=True
+
 class Recent_Customer(BaseModel):
     customer_id: str
     customer_name: str

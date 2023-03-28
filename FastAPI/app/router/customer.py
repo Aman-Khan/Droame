@@ -28,3 +28,28 @@ def registerCustomer(db: Session = Depends(get_db), user: oauth.get_current_user
     operator = user.operator_id
     recCust = db.query(models.Customers).filter(models.Customers.operator_id==operator).limit(10).all()
     return recCust
+
+# @router.get('/customer/details')
+# def get_customer_details(searchOption: str, searchValue: str):
+#     # Here you can use searchOption and searchValue to fetch customer details from a database or other source
+#     return {"searchOption": searchOption, "searchValue": searchValue}
+
+@router.get("/customer/details", response_model=schemas.Customer_Details)
+def read_item(search_option: str = None, search_value: str = None, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
+    if search_option is None or search_value is None: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='invalid search')
+    else:
+        if search_option=='customer_id':
+            search_cust = db.query(models.Customers).filter(models.Customers.customer_id==search_value).filter(models.Customers.operator_id==user.operator_id).first()
+            if search_cust is None: raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="customer don't exist")
+            else: return search_cust
+        elif search_option=='customer_name':
+            search_cust = db.query(models.Customers).filter(models.Customers.customer_name==search_value).filter(models.Customers.operator_id==user.operator_id).first()
+            if search_cust is None: raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="customer don't exist")
+            else: return search_cust
+        elif search_option=='customer_email':
+            search_cust = db.query(models.Customers).filter(models.Customers.customer_email==search_value).filter(models.Customers.operator_id==user.operator_id).first()
+            if search_cust is None: raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="customer don't exist")
+            else: return search_cust
+        else: raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='invalid option')
+        
+        
