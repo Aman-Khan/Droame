@@ -1,4 +1,5 @@
 from typing import List
+from datetime import datetime 
 from fastapi import APIRouter, Depends, HTTPException, status
 from ..database import get_db, Session
 from .. import models, schemas, oauth, utils
@@ -7,7 +8,7 @@ router = APIRouter(tags=['Customer'])
 
 @router.post('/booking')
 def bookDroneShot(book_info: schemas.Book_Drone_Shot, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):
-
+    if book_info.booked_for_time < datetime.utcnow(): raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="you can't book slot in past")
     book_info.operator_id = user.operator_id
     search_time_slot = db.query(models.Bookings).filter(models.Bookings.booked_for_time==book_info.booked_for_time).first()
     if search_time_slot is not None: raise HTTPException(status_code=status.HTTP_226_IM_USED, detail='time slot is not avaliable')   
@@ -41,7 +42,15 @@ def bookDroneShot(book_info: schemas.Book_Drone_Shot, db: Session = Depends(get_
     db.commit()
     db.refresh(booked)
 
-    return {'message':'working'}
+    booked_res = schemas.Booking_Response(
+        booking_id=booked.booking_id,
+        operator_id=booked.operator_id,
+        location=book_info.location,
+        drone_shot=book_info.drone_shot,
+        customer_id=book_info.customer_id
+    )
+
+    return booked_res
 
 
 @router.post('/register', status_code=status.HTTP_201_CREATED)
@@ -67,11 +76,6 @@ def registerCustomer(db: Session = Depends(get_db), user: oauth.get_current_user
     operator = user.operator_id
     recCust = db.query(models.Customers).filter(models.Customers.operator_id==operator).limit(10).all()
     return recCust
-
-# @router.get('/customer/details')
-# def get_customer_details(searchOption: str, searchValue: str):
-#     # Here you can use searchOption and searchValue to fetch customer details from a database or other source
-#     return {"searchOption": searchOption, "searchValue": searchValue}
 
 @router.patch("/update/{customerId}")
 def updateCustomerDetails(customerId: str, data: dict, db: Session = Depends(get_db), user: oauth.get_current_user = Depends()):

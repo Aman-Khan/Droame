@@ -2,6 +2,16 @@ from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, EmailStr
 
+class Booking_Response(BaseModel):
+    booking_id: int
+    operator_id: str
+    location: str
+    drone_shot: str
+    customer_id: str
+
+    class Config:
+        orm_mode=True
+
 class Commit_Booking(BaseModel):
     booking_id: Optional[int]
     operator_id: str
