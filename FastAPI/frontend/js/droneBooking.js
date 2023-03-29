@@ -1,3 +1,4 @@
+// Booking api will take customer information return booking detail with booking id
 const bookingForm = document.querySelector('#drone-shot-booking');
 
 bookingForm.addEventListener('submit', async (e) => {
@@ -16,7 +17,7 @@ bookingForm.addEventListener('submit', async (e) => {
   };
 
 
-  const response = await fetch('http://127.0.0.1:8000/booking', {
+  const response = await fetch('http://127.0.0.1:8000/booking', { 
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -28,6 +29,7 @@ bookingForm.addEventListener('submit', async (e) => {
   if (response.ok) {
     const bookingResponse = await response.json();
     alert('Slot Booked');
+
     // use bookingResponse for further operations
     console.log(bookingResponse);
     const bookingBloc = document.getElementById("booking-details");
@@ -35,7 +37,7 @@ bookingForm.addEventListener('submit', async (e) => {
     <b>Booking Id</b> : ${bookingResponse.booking_id}
     <br> <b>Customer Id</b> : ${bookingResponse.customer_id}
     <br> <b>Location</b> : ${bookingResponse.location}
-    <br> <b>Event Time</b> : ${bookingResponse.booked_for_time}`;
+    <br> <b>Event Time</b> : ${datetime}`;
     // Display response JSON body in innerHTML
   } else {
     response.json().then(data => {

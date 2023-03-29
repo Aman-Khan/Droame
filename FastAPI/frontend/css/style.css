@@ -1,8 +1,9 @@
-
+/* form color */
 .form-group{
     color: whitesmoke;
 }
 
+/* keep quick access and dynamic block hidden*/
 #dynamicBlock > .container {
     display: none;
 }
@@ -11,16 +12,10 @@
     display: none;
 }
 
+/* Dyanamic Block Constainer Headings */
 .invi-container{
     color: whitesmoke;
     padding-left: 20px;
-}
-
-.invi-container > h1{
-    padding-top: 10px;
-    font-size: 30px;
-    color: whitesmoke;
-    opacity: 100;
 }
 
 .operator-block{
@@ -33,25 +28,11 @@
     margin-top: 20px;
 }
 
-.custom-width-65 {
-    position: fixed;
-    width: 65%;
-    right: 0;
-}
-.bg-image {
-    background-image: url("image/droame-logo.jpg");
-    background-repeat: repeat;
-    background-size: 40px 40px;
-    width: 100%;
-}
-.back {
-    width: 100%;
-}
-
+/* keep dyanmic block content in center and managed */
 .div-center {
     width: 400px;
     height: 400px;
-    opacity: 80%;
+    opacity: 100%;
     /* background-image: url("image/droame-logo.jpg"); */
     background-size: 100%;
     position: absolute;
@@ -70,4 +51,14 @@
 div.content {
     display: table-cell;
     vertical-align: middle;
+}
+
+.custom-width-65 {
+    position: fixed;
+    width: 65%;
+    right: 0;
+}
+
+.back {
+    width: 100%;
 }

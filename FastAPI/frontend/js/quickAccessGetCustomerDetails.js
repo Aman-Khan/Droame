@@ -29,7 +29,7 @@ custSearch.addEventListener("submit", function(event) {
       customerDetails.innerHTML = `<b>Customer ID</b> : ${data.customer_id}
        <br> <b>Name</b> : ${data.customer_name}
        <br> <b>Email</b> : ${data.customer_email}
-       <br> <b>Phone No</b> : ${data.customer_name}`;
+       <br> <b>Phone No</b> : ${data.phone_number}`;
     })
     .catch(error => {
       // display an alert with the error details

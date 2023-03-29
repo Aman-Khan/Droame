@@ -6,42 +6,49 @@
         <link rel="stylesheet" href="css/style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/sessionStorage.js"></script>
-
+        <link rel="icon" type="image/x-icon" href="image/favicon.ico">
     </head>
     <body>
+        <!-- Navigation Bar -->
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-            <div class="d-flex justify-content-start align-items-center px-4">
-                <a class="img-thumbnail" href="#">
-                    <img src="image/droame-logo.jpg" alt="Logo" class="img-fluid" width="40" height="40">
-                </a>
-                <a class="navbar-brand px-4" href="#">Droame</a>
-            </div>
-            <a class="navbar-brand px-4" href="#"><small>#Operator</small> : <span id="operator-id"></span></a>
+                <div class="d-flex justify-content-start align-items-center px-4">
+                    <a class="img-thumbnail" href="#">
+                        <img src="image/droame-logo.jpg" alt="Logo" class="img-fluid" width="40" height="40">
+                    </a>
+                    <a class="navbar-brand px-4" href="#">Droame</a>
+                </div>
+                <a class="navbar-brand px-4" href="#"><small>#Operator</small> : <span id="operator-id"></span></a>
             </div>
         </nav>
+        
+        <!--Background Image -->
         <div class="container div-center">
             <div class="background-image ">
                 <img src="image/droame-logo.jpg"  width=100% alt="">
             </div>
         </div>
-
+        
+        <!-- Operation List -->
         <div id="optionBlock" class="container-fluid">
             <div class="container w-25 float-start mx-3 my-4">
-                <div class="">
-                    <ul class="list-group fw-bold">
-                        <li class="list-group-item" data-target="#createCustomerContainer, #quickAccessCreateCustomer"><a href="#" class="text-decoration-none">Create Customer</a></li>
-                        <li class="list-group-item" data-target="#getCustomerDetailsContainer, #quickAccessCustomerDetails"><a href="#" class="text-decoration-none">Get Customer Details</a></li>
-                        <li class="list-group-item" data-target="#manageCustomerContainer, #quickAccessManageCustomer"><a href="#" class="text-decoration-none">Manage Customer</a></li>
-                        <li class="list-group-item" data-target="#bookDroneShotContainer, #quickAccessBookDroneShot"><a href="#" class="text-decoration-none">Book Drone Shot</a></li>
-                    </ul>
-                    <ul class="list-group fw-bold px-2">
-                        <br><br>
-                        <li class="list-group-item" data-target="#quickAccessContainer"><a href="#" class="text-decoration-none text-info"><i>Quick Access</i></a></li>
-                    </ul>
 
+                <!-- Operations List -->
+                <ul class="list-group fw-bold">
+                    <li class="list-group-item" data-target="#createCustomerContainer, #quickAccessCreateCustomer"><a href="#" class="text-decoration-none">Create Customer</a></li>
+                    <li class="list-group-item" data-target="#getCustomerDetailsContainer, #quickAccessCustomerDetails"><a href="#" class="text-decoration-none">Get Customer Details</a></li>
+                    <li class="list-group-item" data-target="#manageCustomerContainer, #quickAccessManageCustomer"><a href="#" class="text-decoration-none">Manage Customer</a></li>
+                    <li class="list-group-item" data-target="#bookDroneShotContainer, #quickAccessBookDroneShot"><a href="#" class="text-decoration-none">Book Drone Shot</a></li>
+                </ul>
+
+                <!-- Quick Access -->
                 <div id="quickAccessMultiple">
+                    <!-- Option 1 Create Customer Quick Access -->
                     <div id="quickAccessCreateCustomer" class="container invi-container">
+                        <ul class="list-group fw-bold px-2">
+                            <br><br>
+                            <li class="list-group-item" data-target="#quickAccessContainer"><a href="#" class="text-decoration-none text-info"><i>Quick Access</i></a></li>
+                        </ul>
                         <table class="table table-bordered">
                             <thead class="table-dark">
                               <tr>
@@ -52,10 +59,15 @@
                             </thead>
                             <tbody id="quick1-table-body">
                             </tbody>
-                          </table>
+                        </table>
                     </div>
-                        
+
+                    <!-- Option 2 Get Customer Details Quick Access -->
                     <div id="quickAccessCustomerDetails" class="container float-end py-2">
+                        <ul class="list-group fw-bold px-2">
+                            <br><br>
+                            <li class="list-group-item" data-target="#quickAccessContainer"><a href="#" class="text-decoration-none text-info"><i>Quick Access</i></a></li>
+                        </ul>
                         <div class="card text-white bg-primary" style="max-width: 23rem;">
                             <div class="card-header"><b>Customer Details</b></div>
                             <div class="card-body">
@@ -65,7 +77,12 @@
                         </div>
                     </div>
 
+                    <!-- Option 3 Drone Booking Quick Access -->
                     <div id="quickAccessBookDroneShot" class="container float-end py-2">
+                        <ul class="list-group fw-bold px-2">
+                            <br><br>
+                            <li class="list-group-item" data-target="#quickAccessContainer"><a href="#" class="text-decoration-none text-info"><i>Quick Access</i></a></li>
+                        </ul>
                         <div class="card text-white bg-primary" style="max-width: 23rem;">
                             <div class="card-header"><b>Booking Details</b></div>
                             <div class="card-body">
@@ -76,64 +93,75 @@
                 </div>
 
             </div>
-            </div>
-            <div id="dynamicBlock" class="container custom-width-65 my-4 mx-5 float-end operator-block">
-                <div id="createCustomerContainer" class="container invi-container">
-                    <div class="back">
-                        <div class="div-center">
-                            <div class="content">
-                            <h4>Register Customer</h4>
-                            <form id="reg-form">
-                                <div class="form-group">
-                                  <label for="CustomerId">Customer Id</label>
-                                  <input type="text" class="form-control" id="CustomerId" name="customer_id" placeholder="Customer Id">
-                                </div>
-                                <div class="form-group">
-                                  <label for="CustomerName">Customer Name</label>
-                                  <input type="text" class="form-control" id="CustomerName" name="customer_name" placeholder="Name">
-                                </div>
-                                <div class="form-group">
-                                  <label for="CustomerEmail">Email address</label>
-                                  <input type="email" class="form-control" id="CustomerEmail" name="customer_email" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                  <label for="PhoneNumber">Phone no.</label>
-                                  <input type="tel" class="form-control" id="PhoneNumber" name="phone_number" placeholder="Phone No">
-                                </div>
-                                <button type="submit" class="btn btn-primary my-2">Register</button>
-                              </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script src="js/quickAccessCreateCustomer.js"></script>
-                
-                <div id="getCustomerDetailsContainer" class="container invi-container">
-                    <div class="content py-4">
-                        <h4>Get Customer Details</h4>
-                        <form id="manage-customer-search" class="form-inline">
-                            <div class="form-group mx-sm-3 mb-2">
-                                <label for="search-options" class="sr-only">Search by:</label>
-                                <select class="form-control" id="search-options" name="search_option">
-                                <option value="customer_id">Customer ID</option>
-                                <option value="customer_email">Customer Email</option>
-                                <option value="phone_number">Phone Number</option>
-                                </select>
-                            </div>
-                            <div class="form-group mx-sm-3 mb-2">
-                                <label for="search-value" class="sr-only">Search value:</label>
-                                <input type="text" class="form-control" id="search-value" name="search_value" placeholder="Enter search value">
-                            </div>
-                            <button type="submit" class="btn btn-primary mx-3 px-3">Search</button>
-                        </form>
-                    </div>
-                </div>
-                <script src="js/quickAccessGetCustomerDetails.js"></script>
+        </div>
+            
 
-                <div id="manageCustomerContainer" class="container invi-container">
-                    <h1>Manage Customer</h1>
+        <!-- Dyanamic Block -->
+        <div id="dynamicBlock" class="container custom-width-65 my-4 mx-5 float-end operator-block">
+            
+            <!-- Option 1 Create Customer Dyanmic Block -->
+            <div id="createCustomerContainer" class="container invi-container">
+                <div class="back">
+                    <div class="div-center create-customer-form">
+                        <h4 style="color:white">Register Customer</h4>
+                        
+                        <form id="reg-form">
+                            <div class="form-group">
+                                <label for="CustomerId">Customer Id</label>
+                                <input type="text" class="form-control" id="CustomerId" name="customer_id" placeholder="Customer Id">
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerName">Customer Name</label>
+                                <input type="text" class="form-control" id="CustomerName" name="customer_name" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerEmail">Email address</label>
+                                <input type="email" class="form-control" id="CustomerEmail" name="customer_email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="PhoneNumber">Phone no.</label>
+                                <input type="tel" class="form-control" id="PhoneNumber" name="phone_number" placeholder="Phone No">
+                            </div>
+                            <button type="submit" class="btn btn-primary my-2">Register</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <script src="js/quickAccessCreateCustomer.js"></script>
+                
+            <!-- Option 2 Get Customer Details Dyanmic Block -->
+            <div id="getCustomerDetailsContainer" class="container invi-container">
+                <div class="content py-4">
+                    <h4>Get Customer Details</h4>
+
+                    <form id="manage-customer-search" class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="search-options" class="sr-only">Search by:</label>
+                            <select class="form-control" id="search-options" name="search_option">
+                            <option value="customer_id">Customer ID</option>
+                            <option value="customer_email">Customer Email</option>
+                            <option value="phone_number">Phone Number</option>
+                            </select>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="search-value" class="sr-only">Search value:</label>
+                            <input type="text" class="form-control" id="search-value" name="search_value" placeholder="Enter search value">
+                        </div>
+                        <button type="submit" class="btn btn-primary mx-3 px-3">Search</button>
+                    </form>
+
+                </div>
+            </div>
+            <script src="js/quickAccessGetCustomerDetails.js"></script>
+
+            <!-- Option 3 Manage Customer Dyanmic Block -->
+            <div id="manageCustomerContainer" class="container invi-container">
+                <div style="padding-top: 3%;">
+                <h4>Manage Customer</h4>
+                </div>
                 <div class="container-fluid" style="margin-top: 40px;">
-                    <h5><i>Update Customer Details</i></h5>
+                    <h6><i>Update Customer Details</i></h6>
                     <form id="manage-customer-edit" class="form-inline">
                         <div class="row">
                             <div class="col-sm">
@@ -158,8 +186,9 @@
                         </div>
                     </form>
                 </div>
+
                 <div class="container-fluid" style="margin-top: 40px;">
-                    <h5><i>Delete Customer</i></h5>
+                    <h6><i>Delete Customer</i></h6>
                     <form id="manage-customer-delete" class="form-inline">
                         <div class="row" style="width: 67%;" >
                             <div class="col">
@@ -175,47 +204,51 @@
             </div>
             <script src="js/manageCustomer.js"></script>
 
+            <!-- Option 4 Drone Booking Dyanmic Block -->
             <div id="bookDroneShotContainer" class="container invi-container">
-                <div id="createDroneShotContainer" class="container invi-container">
-                    <h4>Create Drone Shot</h4>
-                    <form id="drone-shot-booking">
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="customerId">Customer ID</label>
-                            <input type="text" class="form-control" id="customerId" name="customer_id" placeholder="Customer ID" required>
+                <div class="content py-4">
+                    <div id="createDroneShotContainer" class="container invi-container">
+                        <h4>Create Drone Shot</h4>
+                        <form id="drone-shot-booking">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="customerId">Customer ID</label>
+                                <input type="text" class="form-control" id="customerId" name="customer_id" placeholder="Customer ID" required>
+                            </div>
+                            <div class="form-group col">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
+                            </div>
                         </div>
-                        <div class="form-group col">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="datetime">Date and Time</label>
+                                <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                            </div>
+                            <div class="form-group col">
+                                <label for="droneShotType">Drone Shot Type</label>
+                                <select class="form-control" id="droneShotType" name="drone_shot">
+                                    <option value="spinning elevation shot">Spinning elevation shot</option>
+                                    <option value="half moon bay shot">Half moon bay shot</option>
+                                    <option value="object shot">Object shot</option>
+                                    <option value="180-degree shot">180-degree shot</option>
+                                    <option value="obstacle shot to reveal the subject">Obstacle shot to reveal the subject</option>
+                                    <option value="object shot with large reveal down">Object shot with large reveal down</option>
+                                    <option value="slow reveal out of the subject">Slow reveal out of the subject</option>
+                                    <option value="high angle shot">High angle shot</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="datetime">Date and Time</label>
-                            <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="droneShotType">Drone Shot Type</label>
-                            <select class="form-control" id="droneShotType" name="drone_shot">
-                                <option value="spinning elevation shot">Spinning elevation shot</option>
-                                <option value="half moon bay shot">Half moon bay shot</option>
-                                <option value="object shot">Object shot</option>
-                                <option value="180 degree shot">180-degree shot</option>
-                                <option value="obstacle shot to reveal the subject">Obstacle shot to reveal the subject</option>
-                                <option value="object shot with large reveal down">Object shot with large reveal down</option>
-                                <option value="slow reveal out of the subject">Slow reveal out of the subject</option>
-                                <option value="high angle shot">High angle shot</option>
-                            </select>
-                        </div>
-                    </div>
-                        <button type="submit" class="btn btn-primary my-2 float-end">Book</button>                    
-                    </form>
+                            <button type="submit" class="btn btn-primary my-2 float-end">Book</button>                    
+                        </form>
+                    </div>  
                 </div>
-                <script src="js/droneBooking.js"></script>
+            </div>
+            <script src="js/droneBooking.js"></script>
                 
-
         </div>
 
+        <!-- Script to Hide/Show Quick Access & Dyanmic Blocks -->
         <script>
             $(document).ready(function() {
                 // Set the click event for the list items
@@ -235,6 +268,7 @@
                 });
             });
         </script>
-        <script src="js/customerReg.js"></script>          
+        <script src="js/customerRegistration.js"></script>     
+
 </body>
 </html>

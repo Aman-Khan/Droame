@@ -1,3 +1,5 @@
+// Updata Customer Details
+
 document.getElementById("manage-customer-edit").addEventListener("submit", function(event) {
   event.preventDefault(); // prevent form from submitting normally
 
@@ -38,7 +40,7 @@ document.getElementById("manage-customer-edit").addEventListener("submit", funct
 });
 
 
-//manage customer details(delete)
+//Delete Customer from data base
 document.getElementById("manage-customer-delete").addEventListener("submit", function(event) {
   event.preventDefault(); // prevent form from submitting normally
 
