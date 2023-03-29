@@ -97,7 +97,7 @@ def deleteCutomer(customerId: str, db: Session = Depends(get_db), user: oauth.ge
     else:
         db.delete(get_customer)
         db.commit()
-        raise HTTPException(status_code=status.HTTP_202_ACCEPTED, detail='Posted is removed')
+        raise HTTPException(status_code=status.HTTP_202_ACCEPTED, detail='Customer is removed')
             
 #drone booking
 @router.post('/booking')
